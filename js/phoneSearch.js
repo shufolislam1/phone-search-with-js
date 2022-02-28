@@ -17,9 +17,15 @@ const searchPhone = () =>{
 const displaySearchResult = datum =>{
     // console.log(datum.data);
     const dataArray = datum.data;
+    const searchResult = document.getElementById('search-result');
+    searchResult.innerHTML = '';
+    // if(dataArray.length == 0){
+    //     const anotherDiv = document.createElement('div')
+    //     div.innerText = `Not Found`
+    //     anotherDiv.appendChild(div)
+    // }
     dataArray.forEach(datas =>{
-        console.log(datas);
-        const searchResult = document.getElementById('search-result');
+        // console.log(datas);
         const div = document.createElement('div')
         div.classList.add('col')
         div.innerHTML = `
