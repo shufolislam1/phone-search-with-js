@@ -1,7 +1,6 @@
 const searchPhone = () =>{
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value;
-    // console.log(searchText);
 
     // clear the input
     searchField.value = '';
@@ -16,16 +15,25 @@ const searchPhone = () =>{
 
 const displaySearchResult = datum =>{
     // console.log(datum.data);
-    const dataArray = datum.data;
+    const dataArray = datum.data.slice(0,20);
     const searchResult = document.getElementById('search-result');
+    // clearing the details card
     searchResult.textContent = '';
-    // if(dataArray.length == 0){
-    //     const anotherDiv = document.createElement('div')
-    //     div.innerText = `Not Found`
-    //     anotherDiv.appendChild(div)
-    // }
+
+    // error handaling
+    let error  = document.getElementById('error')
+    if(dataArray.length == 0){
+      error.innerText = 'Result Not Found'
+      error.style.color = 'red'
+      error.style.textAlign = 'center'
+    }else{
+      error.textContent = '';
+    }
+    // clearing error
+    // error.textContent = '';
+
     dataArray.forEach(datas =>{
-        // console.log(datas);
+        console.log(datas);
         const div = document.createElement('div')
         div.classList.add('col')
         div.innerHTML = `
@@ -41,8 +49,6 @@ const displaySearchResult = datum =>{
         </div>
       </div>
         `
-        // div.slice(0, 21);
-        // div.innerHTML.slice(20,30);
         searchResult.appendChild(div)
     })
 }
@@ -51,7 +57,7 @@ const loadPhoneDetail = phoneId =>{
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
     fetch(url)
     .then(res => res.json())
-    .then(data => displayPhoneDetail(data,data.data.mainFeatures))
+    .then(data => displayPhoneDetail(data))
 }
 
 const displayPhoneDetail = phone =>{
@@ -61,6 +67,7 @@ const displayPhoneDetail = phone =>{
     const div = document.createElement('div')
     div.classList.add('card')
     div.innerHTML = `
+    <div class="border-0 shadow">
     <img src="${phone.data.image}" class="card-img-top p-5" alt="...">
     <div class="card-body">
       <h5 class="card-title">${phone.data.brand}</h5>
@@ -94,6 +101,7 @@ const displayPhoneDetail = phone =>{
 
         WLAN:  ${phone?.data?.others?.WLAN ? phone.data.others.WLAN: 'Data not availabe'}
         </p>
+    </div>
     </div>
     `
     singelResult.appendChild(div)
