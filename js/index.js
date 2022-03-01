@@ -1,6 +1,8 @@
 const searchPhone = () =>{
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value;
+    const singelDiv = document.getElementById('singel-result')
+    singelDiv.textContent = '';
 
     // clear the input
     searchField.value = '';
@@ -29,8 +31,7 @@ const displaySearchResult = datum =>{
     }else{
       error.textContent = '';
     }
-    // clearing error
-    // error.textContent = '';
+
 
     dataArray.forEach(datas =>{
         console.log(datas);
@@ -61,13 +62,11 @@ const loadPhoneDetail = phoneId =>{
 }
 
 const displayPhoneDetail = phone =>{
-    console.log(phone);
     const singelResult = document.getElementById('singel-result')
     singelResult.textContent = '';
     const div = document.createElement('div')
     div.classList.add('card')
     div.innerHTML = `
-    <div class="border-0 shadow">
     <img src="${phone.data.image}" class="card-img-top p-5" alt="...">
     <div class="card-body">
       <h5 class="card-title">${phone.data.brand}</h5>
@@ -101,7 +100,6 @@ const displayPhoneDetail = phone =>{
 
         WLAN:  ${phone?.data?.others?.WLAN ? phone.data.others.WLAN: 'Data not availabe'}
         </p>
-    </div>
     </div>
     `
     singelResult.appendChild(div)
