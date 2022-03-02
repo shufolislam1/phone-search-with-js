@@ -65,9 +65,10 @@ const displayPhoneDetail = phone =>{
     const singelResult = document.getElementById('singel-result')
     singelResult.textContent = '';
     const div = document.createElement('div')
-    div.classList.add('card')
+    // div.classList.add('card')
     div.innerHTML = `
-    <img src="${phone.data.image}" class="card-img-top p-5" alt="...">
+    <div class="row row-cols-1 row-cols-lg-1">
+    <img src="${phone.data.image}" class="card-img-top p-5 mx-auto" alt="...">
     <div class="card-body">
       <h5 class="card-title">${phone.data.brand}</h5>
       <h5>${phone.data.name}</h5>
@@ -100,6 +101,7 @@ const displayPhoneDetail = phone =>{
 
         WLAN:  ${phone?.data?.others?.WLAN ? phone.data.others.WLAN: 'Data not availabe'}
         </p>
+    </div>
     </div>
     `
     singelResult.appendChild(div)
